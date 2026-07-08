@@ -17,11 +17,28 @@ if (config.smtp.configured) {
   });
 }
 
-// Sends an email via real SMTP if configured, otherwise logs it to the console
-// so the flow stays testable end-to-end without real credentials.
+// Sends via Resend's HTTP API if configured (works over HTTPS, unaffected by
+// hosts that block outbound raw SMTP), else falls back to SMTP, else logs to
+// the console so the flow stays testable end-to-end without real credentials.
 async function sendMail({ to, subject, html, text }) {
+  if (config.resend.configured) {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${config.resend.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ from: config.resend.fromEmail, to, subject, html, text }),
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`Resend API error ${res.status}: ${body}`);
+    }
+    return { delivered: true, mode: 'resend' };
+  }
+
   if (!transporter) {
-    console.log('\n--- [email fallback: SMTP not configured] -------------------------');
+    console.log('\n--- [email fallback: no email provider configured] ----------------');
     console.log(`TO:      ${to}`);
     console.log(`SUBJECT: ${subject}`);
     console.log(`BODY:\n${text || html}`);
