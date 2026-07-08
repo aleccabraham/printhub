@@ -13,6 +13,10 @@ if (!smtpConfigured) {
 
 const config = {
   port: Number(process.env.PORT) || 4000,
+  // Root directory for the SQLite DB file and uploads/. Defaults to server/
+  // itself for local dev. On hosts with ephemeral local disk (e.g. Railway),
+  // set this to a mounted persistent volume path so data survives redeploys.
+  dataDir: process.env.DATA_DIR || path.join(__dirname, '..', '..'),
   // TEMPORARY testing value — swap later by changing this env var only, no code change needed.
   adminEmail: process.env.ADMIN_EMAIL || 'alexabrahametc@gmail.com',
   smtp: {
