@@ -1,0 +1,260 @@
+/* Card */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-pill);
+  padding: 12px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-danger {
+  background: #fff;
+  color: var(--color-red-text);
+  border-color: var(--color-red-bg);
+}
+.btn-danger:hover:not(:disabled) {
+  background: var(--color-red-bg);
+}
+
+.btn-sm {
+  padding: 8px 18px;
+  font-size: 13px;
+}
+
+/* Nav pill */
+.nav-pill {
+  background: #fff;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  padding: 10px 12px 10px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.nav-pill .nav-user {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+.nav-pill .nav-user strong {
+  color: var(--color-text);
+}
+
+.nav-pill .nav-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-pill .nav-link {
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+.nav-pill .nav-link.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Stat card */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 22px 24px;
+}
+
+.stat-card .stat-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.stat-card .stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-card .stat-desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* Status badge */
+.badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.badge-amber { background: var(--color-amber-bg); color: var(--color-amber-text); }
+.badge-red { background: var(--color-red-bg); color: var(--color-red-text); }
+.badge-green { background: var(--color-green-bg); color: var(--color-green-text); }
+.badge-neutral { background: var(--color-neutral-bg); color: var(--color-neutral-text); }
+.badge-plum { background: var(--color-plum-bg); color: var(--color-plum-text); }
+
+/* Step progress (student wizard) */
+.step-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 32px;
+}
+
+.step-dot {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+}
+.step-dot.done, .step-dot.active {
+  background: var(--color-primary);
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+.step-labels .current {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Table-ish list rows */
+.row-list .row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 16px;
+}
+.row-list .row-item:last-child {
+  border-bottom: none;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.plum-header {
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  padding: 18px 24px;
+  font-weight: 700;
+}
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+/* Check Status page: lookup form beside results on wide screens. */
+.status-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .status-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.results-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
+.pill-toggle {
+  display: inline-flex;
+  background: var(--color-neutral-bg);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  gap: 4px;
+}
+.pill-toggle button {
+  border: none;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.pill-toggle button.active {
+  background: var(--color-primary);
+  color: #fff;
+}

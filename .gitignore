@@ -1,0 +1,14 @@
+node_modules/
+server/node_modules/
+client/node_modules/
+server/printhub.db
+server/printhub.db-shm
+server/printhub.db-wal
+server/uploads/tmp/*
+server/uploads/jobs/*
+!server/uploads/tmp/.gitkeep
+!server/uploads/jobs/.gitkeep
+.env
+server/.env
+client/dist/
+*.log
