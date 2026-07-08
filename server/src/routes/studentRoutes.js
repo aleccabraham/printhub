@@ -169,13 +169,14 @@ router.post('/jobs', (req, res) => {
       const job = db.prepare('SELECT * FROM jobs WHERE id = ?').get(jobId);
       const baseUrl = getBaseUrl(req);
 
-      try {
-        await sendAdminNotification({ job, baseUrl });
-      } catch (emailErr) {
-        console.error('[studentRoutes] Failed to send admin notification email:', emailErr.message);
-      }
-
+      // The job is already saved — respond to the student immediately rather
+      // than making them wait on a third-party SMTP round trip, which can be
+      // slow or hang. The email send continues in the background.
       res.json({ jobId, status: job.status, totalAmount: job.total_amount });
+
+      sendAdminNotification({ job, baseUrl }).catch((emailErr) => {
+        console.error('[studentRoutes] Failed to send admin notification email:', emailErr.message);
+      });
     } catch (e) {
       fs.unlink(screenshotTmpPath, () => {});
       res.status(e.status || 500).json({ error: e.message });

@@ -8,6 +8,12 @@ if (config.smtp.configured) {
     port: config.smtp.port,
     secure: config.smtp.port === 465,
     auth: { user: config.smtp.user, pass: config.smtp.pass },
+    // Some hosts silently drop outbound SMTP traffic instead of rejecting
+    // it, which otherwise hangs the connection indefinitely. Fail fast so
+    // the failure is visible instead of blocking forever.
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
   });
 }
 
